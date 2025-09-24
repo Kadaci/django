@@ -9,13 +9,19 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      {% if request.user.is_authenticated %}
       <div class="navbar-nav">
         <a class="nav-link active" aria-current="page" href="/posts/">Posts</a>
       <div class="navbar-nav">
         <a class="nav-link active" aria-current="page" href="/posts/create/">Create post</a>
-        <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="/users/logout/">Logout</a>
-      </div>
+         <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="/logout/">Logout</a>
+        {% else %}
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="/register/">Register</a>
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="/login/">Log in </a>
+       {% endif %}
       </div>
     </div>
   </div>

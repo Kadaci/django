@@ -1,21 +1,32 @@
-{%extends 'test.html'%}
-{% load static %}
+{% extends 'base.html' %}
+
+{% block title %}Список задач{% endblock %}
 
 {% block content %}
-{% for post in posts %}
-<div class="card" style="width: 18rem; margin-top: 20px;">
-    {%if post.image %}
-  <img src="{{post.image.url}}" class="card-img-top" alt="...">
-  {% else %}
-    <img src="{% static 'elementor-placeholder-image.png'%}" class="card-img-top" alt="...">
-  {% endif %}
+<h2>Список задач</h2>
+
+<form method="get" action="" class="mb-3 d-flex gap-2">
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Поиск</button>
+</form>
+
+{% for task in tasks %}
+<div class="card" style="margin-top: 20px;">
   <div class="card-body">
-    <h5 class="card-title">{{ post.title }}</h5>
-    <p class="card-text">{{ post.content }}</p>
-    <p class="card-text">{{ post.rate }}</p>
-    <p class="card-text">{{ post.created_at }}</p>
-    <a href="/posts/{{post.id}}/"class="btn btn-primary">Go to post</a>
+    <h5 class="card-title">{{ task.title }}</h5>
+    <p class="card-text"><strong>Категория:</strong> {{ task.category.name }}</p>
+    <a href="{% url 'tasks:task_detail' task.id %}" class="btn btn-primary">Подробнее</a>
   </div>
 </div>
+{% empty %}
+<p>Задач нет</p>
 {% endfor %}
+
+{% if is_paginated %}
+<div class="d-flex justify-content-center mt-4 mb-4">
+    {% for page_num in paginator.page_range %}
+        <a href="?page={{ page_num }}" class="btn btn-primary mx-1">{{ page_num }}</a>
+    {% endfor %}
+</div>
+{% endif %}
 {% endblock %}

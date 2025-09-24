@@ -6,21 +6,6 @@
 <form method="post" action="" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <!-- <p>
-        <label for="image">image</label>
-        <p></p>
-        <input type="file" name="image">
-    </p>
-    <p>
-    <label for="title">Title</Title></label>
-    <p></p>
-    <input type="text" name="title" placeholder="Title">
-    </p>
-    <p>
-    <label for="content">Content</label>
-    <p></p>
-    <input type="text" name="content" placeholder="Content">
-    </p> -->
     <button type="submit">Create post</button>
 </form>
 {% endblock %}
